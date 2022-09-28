@@ -14,12 +14,11 @@ int main(void)
 
         string name[LEN], cor_sec[LEN];
 
-   //get name and section
 /*
 kaya lang netong kunin ay Firstname Lastname i.e. Luna Aries
 bawal --> Luna Aries Stars 
  name -->  [0]   [1]  [0]  <--- cor_sec
-dagdagan mo nalng yung LEN ng name, tapos pati dun sa cout dagdagan mo na din kung gusto
+dagdagan nalng yung LEN ng name, tapos pati dun sa cout
 */
         cout << "Input name: ";
         cin >> name[0]  >> name[1];
@@ -61,10 +60,4 @@ hindi pantay to | dun sa iba dagdagan mo yung \t or space sa cout ng name
         else
            cout << " Better luck next time =(" << endl;
 
-}
-
-void print_str (int len, string str[len])
-{
-         while(len--)
-              cout << *str++ << " ";
 }
