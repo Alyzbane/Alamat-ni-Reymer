@@ -1,10 +1,9 @@
+/*printing the inputted grade*/
 #include <iostream>
 #include <string>
 
 #define N 5
-#define LEN 2
 using namespace std;
-
 
 int main(void)
 {
@@ -12,20 +11,14 @@ int main(void)
         int grades[N];
         int avrg = 0;
 
-        string name[LEN], cor_sec[LEN];
+        string name, cor_sec;
 
-/*
-kaya lang netong kunin ay Firstname Lastname i.e. Luna Aries
-bawal --> Luna Aries Stars 
- name -->  [0]   [1]  [0]  <--- cor_sec
-dagdagan nalng yung LEN ng name, tapos pati dun sa cout
-*/
         cout << "Input name: ";
-        cin >> name[0]  >> name[1];
+        getline(cin, name);
         cout << "Input course & section: ";
-        cin >> cor_sec[0] >> cor_sec[1];
+        getline(cin, cor_sec);
 
-   //get all of the grades
+        //getting the grades of subjects
         for(int i = 0; i < N; i++)
         {
                 cout << subj[i] << " grade: ";
@@ -36,15 +29,13 @@ dagdagan nalng yung LEN ng name, tapos pati dun sa cout
         //kunin ang average
         avrg /= N;
 
+        //printing the output
         cout << "-----------------------------------------" << endl;
 
-/*
-if the name output ay ganto
-Name: Luna Asd  |
-hindi pantay to | dun sa iba dagdagan mo yung \t or space sa cout ng name
-*/
-        cout << "| Name: " <<  name[0] << " " << name[1] << "\t\t|" <<  endl;
-        cout << "| Course & Section: " << cor_sec[0] << " " << cor_sec[1] << "\t \t|" <<  endl;
+        cout << "| Name: " << name << " \t|" << endl;
+
+        cout << "| Course & Section: " << cor_sec
+                << "\t \t|" <<  endl;
 
         cout << "| Subject\t\t\tGrades \t|" << endl;
 
