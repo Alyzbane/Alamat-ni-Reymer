@@ -58,14 +58,14 @@ void problem_two(void)
     for(size_t i = 0; i < arr.size(); i++)
     {
         int comp = target - arr[i];
-        auto finder = complements.find(arr[i]);
-        if(finder !=  complements.end())
+        auto finder = complements.find(arr[i]); //i value exist in the map, take the index
+        if(finder !=  complements.end()) 
         {
             cout << '(' << arr[finder->second] << ", " <<  arr[i] << ") found at ["
-                 <<  finder->second + 1 << "] [" << i + 1 << "]";
+                 <<  finder->second + 1 << "] [" << i + 1 << "]"; 
             pairs_found = true;
         }
-        complements[comp] = i;
+        complements[comp] = i; //assigned the complement and the index ...
     }
 
     if(pairs_found == false)
