@@ -17,6 +17,12 @@ public class Student {
         this.timeOutHistory = new ArrayList<>();
     }
 
+    public void showInfo()
+    {
+        System.out.println("+--- Student Information");
+        System.out.printf("+--- Name: %s\n+--- Course: %s\n+--- Year: %d\n", name, course, year);
+    }
+
     public Student(String name, String course, int year) {
         this.name = name;
         this.course = course;
@@ -38,7 +44,7 @@ public class Student {
         return this.year;
     }
     public void getTimeInHistory() {
-        System.out.println("*** Time In ***");
+        System.out.printf("+--- Name: %s\n+--- Course: %s\n+--- Year: %d\n\n+--- Time In ---+\n\n", name, course, year);
        System.out.println("+-------------------------------+");
 
 
@@ -57,8 +63,8 @@ public class Student {
     }
 
     public void getTimeOutHistory() {
-        System.out.println("*** Time out ***");
-       System.out.println("+-------------------------------+");
+        System.out.printf("\n+--- Name: %s\n+--- Course: %s\n+--- Year: %d\n\n+--- Time Out ---+\n\n", name, course, year);
+        System.out.println("+-------------------------------+");
         if(timeInHistory.size() == 0) 
             System.out.println("|\t No Data \t\t|");
         else
@@ -72,10 +78,10 @@ public class Student {
        System.out.println("+-------------------------------+");
 
     }
-    private void listAllTime()
+    public void listAllTime()
     {
-
-    System.out.println("Time In/Out History");
+     System.out.printf("\n+--- Name: %s\n+--- Course: %s\n+--- Year: %d\n\n", name, course, year);
+    System.out.println("+--- Time In/Out History ---+\n\n");
     System.out.println("+--------------------------------------------------------------------------------+");
     System.out.println("|\t\t Time In \t\t|\t\t Time Out  \t\t|");
     System.out.println("+--------------------------------------------------------------------------------+");
@@ -116,22 +122,7 @@ public class Student {
         return fdt;
     }
 
-public void listTime(int cc) {
-    switch(cc)
-    {
-        case 1: 
-            getTimeInHistory();
-            break;
-        case 2:
-            getTimeOutHistory();
-            break;
-        case 3:
-            listAllTime();
-            break;
-        default:
-            break;
-    }
-}
+
     
 
     public void timeInStudent() {
