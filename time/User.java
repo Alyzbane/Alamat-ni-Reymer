@@ -23,6 +23,7 @@ public class User
   {
     return login_usr;
   }
+
   public int login_menu()
   {
      int option;
@@ -34,9 +35,10 @@ public class User
            ragn = false;
            loadUsers();
        }
-       System.out.println("Welcome to Student Time in & Time Out System");
+       System.out.println("Welcome to Student Time in & Time Out System\n");
        System.out.println
         (
+        "Main user interface\n" +
         "+-------------------------------+\n" +
         "| [1] - Login              \t|\n" +
         "| [2] - Register Student ID\t|\n" +
@@ -72,13 +74,13 @@ public class User
         while ((line = reader.readLine()) != null) {
             String[] parts = line.split(" ");
             if (parts.length != 2) {
-                System.err.println("Error: Invalid format in user file.");
+                System.err.println("\nError: Invalid format in user file.");
                 continue;
             }
             users.put(parts[0], parts[1]);
         }
     } catch (IOException e) {
-        System.err.println("Error: Unable to read user file.");
+        System.err.println("\nError: Unable to read user file.");
     }
 } 
 
@@ -92,8 +94,8 @@ public class User
 
     public boolean authUser()
     {
-        System.out.println("To proceed, verify your username and password first\n");
-        String usrn = util.getUserInputString("Enter username: ");
+        System.out.println("To proceed, verify your Student ID and password first\n");
+        String usrn = util.getUserInputString("Enter Student ID: ");
         String pasd = util.askPass();
         if(authInput(usrn, pasd, 3)) 
         {
@@ -109,30 +111,31 @@ public class User
         {
             case 1:
             if (users.containsKey(username) && users.get(username).equals(password)) {
+                System.out.println("Logined Successfully");
               login_usr = username;
               pass = password;
               return valid;
             }
-            System.out.println("Invalid username or password.");
+            System.out.println("Invalid Student ID or password.");
             return !valid;
 
            case 2:
            if (username.isEmpty() || password.isEmpty()) {
-             System.out.println("Error: Username and password cannot be empty.");
+             System.out.println("\nError: Student ID and password cannot be empty.");
              return !valid;
             }
           if (users.containsKey(username)) {
-          System.out.println("Error: Username already exists.");
+          System.out.println("\nError: Student ID already exists.");
           return !valid;
            }
           return valid;
           case 3:
           if(username.equals(login_usr) && password.equals(pass))
           {
-              System.out.println("Authentication is verified successfully");
+              System.out.println(" -- Authentication is verified successfully -- \n");
               return valid;
           }
-          System.out.println("Authentication of user failed...");
+          System.out.println("Authentication of user failed...\n");
           return !valid;
 
           default:
@@ -142,7 +145,8 @@ public class User
         return !valid;
     }
 
-    private void register() {
+    private void register() 
+    {
     System.out.println("Register Student Information");
     String username = util.getUserInputString("Enter your Student ID: ");
     String password =  util.askPass();
@@ -154,7 +158,41 @@ public class User
         ragn = true;
         System.out.println("Registration successful!");
     } catch (IOException e) {
-        System.err.println("Error: Unable to write to user file.");
+        System.err.println("\nError: Unable to write to user file.");
     }
+  }
+  public void updateFile()
+  {
+    // Write updated contents of HashMap back to file
+        try (PrintWriter writer = new PrintWriter(new FileWriter(USER_FILE))) {
+            for (String key : users.keySet()) {
+                writer.println(key + " " + users.get(key));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+  }
+  public void updateMap(String nkey, String nval)
+  {
+      if(nkey.isEmpty() && nval.isEmpty())
+      {
+          System.out.println("\nError occured in changing the Student ID");
+          return;
+      }
+      users.remove(login_usr);
+      users.put(nkey, nval);
+      //setting the new pass
+      login_usr = nkey;
+      pass = nval;
+  }
+
+  public void removeUser(String nkey)
+  {
+      if(nkey.isEmpty())
+      {
+          System.out.println("\nError occured in changing the Student ID");
+          return;
+      }
+      users.remove(nkey);
   }
 }

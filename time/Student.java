@@ -3,16 +3,12 @@ import java.util.ArrayList;
 import java.time.format.DateTimeFormatter;
 
 public class Student {
-    private String name;
-    private String course;
-    private int year;
+    private String sid;
     private ArrayList<LocalDateTime> timeInHistory;
     private ArrayList<LocalDateTime> timeOutHistory;
 
     public Student() {
-        this.name = "";
-        this.course = "";
-        this.year = 0;
+        this.sid = "";
         this.timeInHistory = new ArrayList<>();
         this.timeOutHistory = new ArrayList<>();
     }
@@ -20,33 +16,63 @@ public class Student {
     public void showInfo()
     {
         System.out.println("+--- Student Information");
-        System.out.printf("+--- Name: %s\n+--- Course: %s\n+--- Year: %d\n", name, course, year);
+        System.out.println("+--- Student ID: " + this.sid);
     }
 
-    public Student(String name, String course, int year) {
-        this.name = name;
-        this.course = course;
-        this.year = year;
+    public Student(String sid)
+    {
+        this.sid = sid;
         this.timeInHistory = new ArrayList<>();
         this.timeOutHistory = new ArrayList<>();
     }
 
-    public String getname()
+    public Student(String sid, ArrayList<LocalDateTime> tih,
+        ArrayList<LocalDateTime> toh)
     {
-        return this.name;
+        this.sid = sid;
+        this.timeInHistory = new ArrayList<>();
+        this.timeOutHistory = new ArrayList<>();
+        setTimeIn(tih);
+        setTimeOut(toh);
     }
-    public String getcs()
-    {
-        return this.course;
-    }
-    public int getyr()
-    {
-        return this.year;
-    }
-    public void getTimeInHistory() {
-        System.out.printf("+--- Name: %s\n+--- Course: %s\n+--- Year: %d\n\n+--- Time In ---+\n\n", name, course, year);
-       System.out.println("+-------------------------------+");
 
+
+    //setter time
+    public void setTimeIn(ArrayList<LocalDateTime> tih)
+    {
+
+        if(tih != null) this.timeInHistory.addAll(tih);
+    }
+    public void setTimeOut(ArrayList<LocalDateTime> toh)
+    {
+        if(toh != null) this.timeOutHistory.addAll(toh);
+    }
+    //end of setter time
+
+    //getter of time
+    public ArrayList<LocalDateTime> getTIH()
+    {
+        return this.timeInHistory;
+    }
+    public ArrayList<LocalDateTime> getTOH()
+    {
+        return this.timeOutHistory;
+    }
+    //end of getter time
+
+    public String getSID()
+    {
+        return this.sid;
+    }
+
+    public void setSID(String uid)
+    {
+        this.sid = uid;
+    }
+
+    public void getTimeInHistory() {
+       showInfo();
+       System.out.println("+-------------------------------+");
 
         if(timeInHistory.size() == 0) 
             System.out.println("|\t No Data \t\t|");
@@ -63,9 +89,9 @@ public class Student {
     }
 
     public void getTimeOutHistory() {
-        System.out.printf("\n+--- Name: %s\n+--- Course: %s\n+--- Year: %d\n\n+--- Time Out ---+\n\n", name, course, year);
+        showInfo();
         System.out.println("+-------------------------------+");
-        if(timeInHistory.size() == 0) 
+        if(timeOutHistory.size() == 0) 
             System.out.println("|\t No Data \t\t|");
         else
         {
@@ -80,7 +106,9 @@ public class Student {
     }
     public void listAllTime()
     {
-     System.out.printf("\n+--- Name: %s\n+--- Course: %s\n+--- Year: %d\n\n", name, course, year);
+    showInfo();
+    getTimeInHistory();
+    getTimeOutHistory();
     System.out.println("+--- Time In/Out History ---+\n\n");
     System.out.println("+--------------------------------------------------------------------------------+");
     System.out.println("|\t\t Time In \t\t|\t\t Time Out  \t\t|");
@@ -121,10 +149,6 @@ public class Student {
 
         return fdt;
     }
-
-
-    
-
     public void timeInStudent() {
         LocalDateTime ldt = LocalDateTime.now();
         System.out.println("Time in at " + dtf(ldt));
@@ -137,15 +161,14 @@ public class Student {
         this.timeOutHistory.add(ldt);
     }
 
-    public void update(Student student)
+    public String update(Student student)
     {
-
          if (student != null) {
-             this.name = student.getname();
-             this.course = student.getcs();
-             this.year = student.getyr();
-         } else {
-             System.out.println("Student does not exist");
+             this.sid = student.getSID();
+             return sid;
          }
+
+         System.out.println("Student does not exist\n");
+         return "";
      }
 }
