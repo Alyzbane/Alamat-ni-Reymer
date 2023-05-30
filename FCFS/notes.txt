@@ -1,0 +1,39 @@
+
+*****currentTime: The currentTime variable is initialized to 0 at the beginning of the simulation. It is then incremented each time a process finishes running. This allows the program to keep track of the current time in the simulation. It is used to determine when a process should start running, and when it should be considered complete.
+
+*****waitingTime: The waitingTime variable is initialized to 0 for each process. It is then incremented by the amount of time the process has to wait before it starts running. This allows the program to keep track of the amount of time each process has spent waiting.
+
+*****completionTime: The completionTime variable is initialized to 0 for each process. It is then set to the value of the currentTime variable plus the process's burst time. This allows the program to keep track of the time at which each process finishes running.
+
+*****turnaroundTime: The turnaroundTime variable is initialized to 0 for each process. It is then set to the value of the completionTime variable minus the process's arrival time. This allows the program to keep track of the total amount of time each process takes to complete.
+
+
+
+
+get the num of process : n
+
+process : 1 < n
+arrival time : x
+burst time : y
+
+
+process results
+current time : keep track of the time of process completion (summation of arrival time of process) eg.
+
+formula 
+*******
+current_time = 0
+waiting_time = current_time - current_process_arrival_time;
+********
+
+
+p1 - 0 
+waiting_time = 0
+
+completion_time = current_time + current_process_Burst_time;
+turnaround_time = completion_time - current_process_arrivalTime;
+current_time  = completion_time
+
+
+task done
+print the results...
